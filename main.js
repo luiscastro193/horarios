@@ -1,13 +1,11 @@
 "use strict";
 const input = document.querySelector("#date");
-const alt = document.querySelector("#alt");
+const margin = document.querySelector("#margin");
 const list = document.querySelector("ul");
 
 const minute = 60 * 1000;
 const hour = 60 * minute;
 const difference = 24 * hour - 30 * minute;
-const initialDifference = 12 * hour;
-const initialDifference2 = 10 * hour;
 const weekdays = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 let times = [];
@@ -31,8 +29,7 @@ function update() {
 	
 	if (input.value) {
 		let date = Date.parse(input.value);
-		let customDifference = alt.checked ? initialDifference2 : initialDifference;
-		times.unshift(date -= customDifference);
+		times.unshift(date -= margin.value * hour);
 		while (new Date(date).getHours() != 2)
 			times.unshift(date -= difference);
 	}
@@ -42,7 +39,7 @@ function update() {
 }
 
 input.oninput = update;
-alt.onchange = update;
+margin.oninput = update;
 update();
 
 document.querySelector("button").onclick = function() {

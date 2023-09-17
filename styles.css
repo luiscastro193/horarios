@@ -1,0 +1,17 @@
+* {
+	font-family: 'Lexend', sans-serif;
+}
+
+body {
+	background-color: black;
+	filter: invert(1);
+}
+
+ul {
+	padding: 0px;
+	list-style-position: inside;
+}
+
+#margin {
+	max-width: 5ch;
+}
