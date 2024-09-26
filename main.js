@@ -29,7 +29,7 @@ function update() {
 	
 	if (input.value) {
 		let date = Date.parse(input.value);
-		times.unshift(date -= margin.value * hour);
+		times.unshift(date -= margin.valueAsNumber * hour);
 		while (new Date(date).getHours() != 2)
 			times.unshift(date -= difference);
 	}
