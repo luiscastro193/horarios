@@ -27,7 +27,7 @@ function update() {
 	times = [];
 	list.innerHTML = '';
 	
-	if (input.value) {
+	if (input.value && margin.value) {
 		let date = Date.parse(input.value);
 		times.unshift(date -= margin.valueAsNumber * hour);
 		while (new Date(date).getHours() != 2)
