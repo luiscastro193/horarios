@@ -10,8 +10,7 @@ const weekdays = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes
 
 let times = [];
 
-function format(timestamp) {
-	let date = new Date(timestamp);
+function format(date) {
 	let time = date.toLocaleTimeString("es-ES", {hour: "numeric", minute: "numeric"});
 	if (date.getHours() <= 3) date.setDate(date.getDate() - 1);
 	return `${date.getDate()} ${weekdays[date.getDay()]} - ${time}`;
@@ -23,19 +22,25 @@ function toItem(string) {
 	return li;
 }
 
+function offsetDate(date, offset) {
+	return new Date(date.getTime() + offset);
+}
+
 function update() {
 	times = [];
 	list.innerHTML = '';
+	let date = new Date(input.value);
+	let marginValue = margin.valueAsNumber;
 	
-	if (input.value && margin.value) {
-		let date = Date.parse(input.value);
-		times.unshift(date -= margin.valueAsNumber * hour);
-		while (new Date(date).getHours() != 2)
-			times.unshift(date -= difference);
+	if (date.getTime() && marginValue) {
+		times.unshift(date = offsetDate(date, -marginValue * hour));
+		
+		while (date.getHours() != 2)
+			times.unshift(date = offsetDate(date, -difference));
+		
+		times = times.map(format);
+		list.append(...times.map(toItem));	
 	}
-	
-	times = times.map(format);
-	list.append(...times.map(toItem));
 }
 
 input.oninput = update;
