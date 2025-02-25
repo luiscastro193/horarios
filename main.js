@@ -2,6 +2,7 @@
 const input = document.querySelector("#date");
 const margin = document.querySelector("#margin");
 const list = document.querySelector("ul");
+const numbersCheck = document.querySelector("#numbers");
 
 const minute = 60 * 1000;
 const hour = 60 * minute;
@@ -10,10 +11,10 @@ const weekdays = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes
 
 let times = [];
 
-function format(date) {
+function format(date, withNumbers) {
 	let time = date.toLocaleTimeString("es-ES", {hour: "numeric", minute: "numeric"});
 	if (date.getHours() <= 3) date.setDate(date.getDate() - 1);
-	return `${date.getDate()} ${weekdays[date.getDay()]} - ${time}`;
+	return (withNumbers ? `${date.getDate()} ` : '') + `${weekdays[date.getDay()]} - ${time}`;
 }
 
 function toItem(string) {
@@ -38,13 +39,14 @@ function update() {
 		while (date.getHours() != 2)
 			times.unshift(date = offsetDate(date, -difference));
 		
-		times = times.map(format);
+		times = times.map(data => format(date, numbersCheck.checked));
 		list.append(...times.map(toItem));	
 	}
 }
 
 input.oninput = update;
 margin.oninput = update;
+numbersCheck.onchange = update;
 update();
 
 document.querySelector("button").onclick = function() {
