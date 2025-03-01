@@ -39,7 +39,7 @@ function update() {
 		while (date.getHours() != 2)
 			times.unshift(date = offsetDate(date, -difference));
 		
-		times = times.map(date => format(date, numbersCheck.checked));
+		times = times.map(time => format(time, numbersCheck.checked));
 		list.append(...times.map(toItem));	
 	}
 }
