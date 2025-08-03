@@ -6,7 +6,7 @@ const numbersCheck = document.querySelector("#numbers");
 
 const minute = 60 * 1000;
 const hour = 60 * minute;
-const difference = 24 * hour - 30 * minute;
+const deltaTime = 24 * hour - 30 * minute;
 const weekdays = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
 let times = [];
@@ -37,7 +37,7 @@ function update() {
 		times.unshift(date = offsetDate(date, -marginValue * hour));
 		
 		while (date.getHours() != 2)
-			times.unshift(date = offsetDate(date, -difference));
+			times.unshift(date = offsetDate(date, -deltaTime));
 		
 		times = times.map(time => format(time, numbersCheck.checked));
 		list.append(...times.map(toItem));	
