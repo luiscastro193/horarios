@@ -2,11 +2,6 @@
 	font-family: InterVariable, sans-serif;
 }
 
-body {
-	background-color: black;
-	filter: invert(1);
-}
-
 ul {
 	padding: 0px;
 	list-style-position: inside;
